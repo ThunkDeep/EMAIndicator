@@ -1,4 +1,4 @@
-name: Build NinjaScript Strategies
+name: Build NinjaScript Strategies (Windows)
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout code
@@ -21,11 +21,14 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Restore dependencies (optional)
+      - name: Copy NinjaTrader DLLs (if needed)
+        run: |
+          mkdir -p $env:USERPROFILE\.nuget\packages
+          # If you have DLLs in a 'libs' folder, copy them to output or reference them in your .csproj
+
+      - name: Restore dependencies
         run: dotnet restore || true
 
-      - name: Build all C# files
+      - name: Build all C# projects
         run: |
-          for csproj in $(find . -name '*.csproj'); do
-            dotnet build "$csproj" --configuration Release
-          done
+          for /r %%f in (*.csproj) do dotnet build "%%f" --configuration Release
