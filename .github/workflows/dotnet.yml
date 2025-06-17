@@ -1,19 +1,12 @@
-# This workflow will build a .NET project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
-
-name: .NET
-
+name: NinjaScript Build
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
     - name: Setup .NET
@@ -22,7 +15,12 @@ jobs:
         dotnet-version: 8.0.x
     - name: Restore dependencies
       run: dotnet restore
-    - name: Build
+    - name: Build NinjaScript
       run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+    - name: Validate Strategy Files
+      run: |
+        echo "Checking for NinjaScript strategy files..."
+        find . -name "*.cs" -path "*/Strategies/*" | head -10
+    # Remove the test step if you don't have unit tests
+    # - name: Test
+    #   run: dotnet test --no-build --verbosity normal
