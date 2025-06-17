@@ -26,7 +26,6 @@ namespace NinjaTrader.NinjaScript.Indicators
     public class AdvancedEMATouchStrategy : Indicator
     {
         private EMA ema;
-        private EMA emaHTF;
         private VOL volume;
         private SMA volumeAvg;
         private SimpleVWAP vwap;
