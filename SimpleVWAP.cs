@@ -20,7 +20,9 @@ using NinjaTrader.NinjaScript.DrawingTools;
 
 namespace NinjaTrader.NinjaScript.Indicators
 {
-    public class VWAP : Indicator
+    // Custom lightweight VWAP calculation. Renamed from VWAP to avoid
+    // conflicts with NinjaTrader's Order Flow VWAP indicator.
+    public class SimpleVWAP : Indicator
     {
         private double cumulativePV = 0.0;
         private double cumulativeVolume = 0.0;
@@ -30,9 +32,9 @@ namespace NinjaTrader.NinjaScript.Indicators
             if (State == State.SetDefaults)
             {
                 Description = "Simple VWAP calculation.";
-                Name = "VWAP";
+                Name = "SimpleVWAP";
                 IsOverlay = true;
-                AddPlot(Brushes.Goldenrod, "VWAP");
+                AddPlot(Brushes.Goldenrod, "SimpleVWAP");
             }
         }
 

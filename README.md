@@ -22,6 +22,11 @@ The **Advanced EMA Touch Strategy Indicator** is a sophisticated technical analy
 7. **Compile** by pressing F5 or clicking the Compile button
 8. The indicator will now appear in your Indicators list
 
+> **Note**: This repository includes a lightweight `SimpleVWAP` indicator used
+> by the strategy. It is named differently to avoid conflicts with NinjaTrader's
+> built-in Order Flow VWAP. Import `SimpleVWAP.cs` if you don't already have a
+> VWAP indicator available.
+
 ## 🔧 Configuration
 
 ### Basic Parameters
