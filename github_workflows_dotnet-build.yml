@@ -1,0 +1,31 @@
+name: Build NinjaScript Strategies
+
+on:
+  push:
+    paths:
+      - '**.cs'
+  pull_request:
+    paths:
+      - '**.cs'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies (optional)
+        run: dotnet restore || true
+
+      - name: Build all C# files
+        run: |
+          for csproj in $(find . -name '*.csproj'); do
+            dotnet build "$csproj" --configuration Release
+          done
