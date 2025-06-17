@@ -29,7 +29,7 @@ namespace NinjaTrader.NinjaScript.Indicators
         private EMA emaHTF;
         private VOL volume;
         private SMA volumeAvg;
-        private VWAP vwap;
+        private SimpleVWAP vwap;
         
         private List<double> swingHighs = new List<double>();
         private List<double> swingLows = new List<double>();
@@ -93,7 +93,7 @@ namespace NinjaTrader.NinjaScript.Indicators
                 ema = EMA(EMAPeriod);
                 volume = VOL();
                 volumeAvg = SMA(volume, 20);
-                vwap = VWAP();
+                vwap = SimpleVWAP();
                 
                 // Multi-timeframe EMAs
                 ema15min = EMA(BarsArray[1], EMAPeriod);
