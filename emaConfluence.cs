@@ -166,7 +166,7 @@ namespace NinjaTrader.NinjaScript.Indicators
                 // Check for higher high
                 if (swingHigh > lastHigh)
                 {
-                    if (!uptrend && lastLow < swingLows[swingLows.Count - 2])
+                    if (!uptrend && swingLows.Count >= 2 && lastLow < swingLows[swingLows.Count - 2])
                         uptrend = true; // Trend reversal to uptrend
                 }
                 else if (uptrend && swingHigh < lastHigh)
@@ -232,7 +232,7 @@ namespace NinjaTrader.NinjaScript.Indicators
             }
             
             // 6. Liquidity sweep check
-            if (swingLows.Count > 2 && Low[1] < swingLows[swingLows.Count - 2])
+            if (swingLows.Count >= 2 && Low[1] < swingLows[swingLows.Count - 2])
             {
                 confluenceScore += 2; // Liquidity grab
             }
