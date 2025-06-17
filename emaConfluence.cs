@@ -259,9 +259,11 @@ namespace NinjaTrader.NinjaScript.Indicators
                 confluenceScore++;
             
             // 9. Multi-timeframe agreement
-            if (ema15min != null && ema15min.Count > 0 && Close[0] > ema15min[0])
+            if (CurrentBars.Length > 1 && CurrentBars[1] >= EMAPeriod &&
+                ema15min != null && ema15min.Count > 0 && Close[0] > ema15min[0])
                 confluenceScore++;
-            if (ema60min != null && ema60min.Count > 0 && Close[0] > ema60min[0])
+            if (CurrentBars.Length > 2 && CurrentBars[2] >= EMAPeriod &&
+                ema60min != null && ema60min.Count > 0 && Close[0] > ema60min[0])
                 confluenceScore++;
             
             return confluenceScore >= MinConfluenceScore;
@@ -297,7 +299,9 @@ namespace NinjaTrader.NinjaScript.Indicators
             
             if (Close[0] > vwap[0]) confluenceText += "✓ Above VWAP\n";
             
-            if (ema15min != null && Close[0] > ema15min[0]) confluenceText += "✓ 15m Bull\n";
+            if (CurrentBars.Length > 1 && CurrentBars[1] >= EMAPeriod &&
+                ema15min != null && Close[0] > ema15min[0])
+                confluenceText += "✓ 15m Bull\n";
             
             Draw.Text(this, "Confluence" + CurrentBar, confluenceText, 0, High[0] + TickSize * 10, 
                 BullishSignalBrush);
