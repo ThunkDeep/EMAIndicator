@@ -32,3 +32,7 @@ jobs:
       - name: Build all C# projects
         run: |
           for /r %%f in (*.csproj) do dotnet build "%%f" --configuration Release
+
+      - name: Run setup script
+        run: bash ./setup.sh
+        # shell: pwsh  
